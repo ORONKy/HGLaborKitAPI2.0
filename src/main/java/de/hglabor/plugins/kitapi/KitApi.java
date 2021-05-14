@@ -166,6 +166,7 @@ public final class KitApi {
         kits.add(PhantomKit.INSTANCE);
         kits.add(ArcherKit.INSTANCE);
         kits.add(ChameleonKit.INSTANCE);
+        kits.add(TrumpKit.INSTANCE);
         //kits.add(PirateKit.INSTANCE);
         //kits.add(BeamKit.INSTANCE);
         //sort alphabetically
