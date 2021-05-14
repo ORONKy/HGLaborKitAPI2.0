@@ -57,6 +57,7 @@ public class TrumpKit extends AbstractKit
 		World world = player.getWorld();
 		Location origin = player.getEyeLocation();
 		origin.setPitch( 0 );
+		origin.add( 0, -1, 0 );
 		Vector direction = origin.getDirection();
 		origin.add( direction.multiply( distance ) );
 		Location centerLocation = origin.clone().add( direction );
@@ -67,21 +68,22 @@ public class TrumpKit extends AbstractKit
 		rotation.normalize();
 		Location blockLocation = centerLocation.clone().add( rotation ).subtract( 0, height/ 2, 0 );
 		rotation.multiply( -1 );
-		int initialX = blockLocation.getBlockX();
-		int initialZ = blockLocation.getBlockZ();
-		int initialY = blockLocation.getBlockY();
 		List<Block> tempLocations = new ArrayList<>();
 		List<Location> firstLayer = new ArrayList<>();
+
+		for ( int j = 0; j < with; j++ )
+		{
+			firstLayer.add( blockLocation.clone() );
+			blockLocation.add(rotation);
+		}
+
 		for ( int i = 0; i < height; i++ )
 		{
-			for ( int j = 0; j < with; j++ )
+			for (Location location: firstLayer )
 			{
-				tempLocations.add( blockLocation.getBlock() );
-				blockLocation.add(rotation);
+				location.setY( location.getY() +1 );
+				tempLocations.add( location.getBlock() );
 			}
-			blockLocation.setY( initialY + i+1 );
-			blockLocation.setX( initialX );
-			blockLocation.setZ( initialZ );
 		}
 		for (Block block : tempLocations){
 			if ( block.getType().equals( Material.AIR ) )
